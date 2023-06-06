@@ -1,0 +1,19 @@
+{
+  "name": "openmusic",
+  "version": "1.0.0",
+  "description": "Proyek pertama dicoding (Fundamental Aplikasi Back-End)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adriCSM/OpenMusic.git"
+  },
+  "author": "Adri Candra Saputra Mangidi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adriCSM/OpenMusic/issues"
+  },
+  "homepage": "https://github.com/adriCSM/OpenMusic#readme"
+}
