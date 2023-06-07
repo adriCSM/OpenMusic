@@ -2,9 +2,12 @@
   "name": "openmusic",
   "version": "1.0.0",
   "description": "Proyek pertama dicoding (Fundamental Aplikasi Back-End)",
-  "main": "server.js",
+  "main": "./src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "start-prod": "NODE_ENV==production node ./src/server.js",
+    "lint": "eslint ./src",
+    "migrate": "node-pg-migrate"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,16 @@
   "bugs": {
     "url": "https://github.com/adriCSM/OpenMusic/issues"
   },
-  "homepage": "https://github.com/adriCSM/OpenMusic#readme"
+  "homepage": "https://github.com/adriCSM/OpenMusic#readme",
+  "devDependencies": {
+    "eslint": "^8.42.0"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "dotenv": "^16.1.4",
+    "joi": "^17.9.2",
+    "nanoid": "^3.3.6",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.11.0"
+  }
 }
