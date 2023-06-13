@@ -48,8 +48,6 @@ exports.up = (pgm) => {
     },
     album_id: {
       type: 'VARCHAR(50)',
-      reference: 'albums',
-      onDelete: 'cascade',
     },
     created_at: {
       type: 'TIMESTAMP',
@@ -71,9 +69,6 @@ exports.up = (pgm) => {
     },
     owner: {
       type: 'VARCHAR(50)',
-      reference: 'users',
-      onDelete: 'cascade',
-      notNull: true,
     },
   });
   pgm.createTable('playlist_songs', {
@@ -83,13 +78,9 @@ exports.up = (pgm) => {
     },
     playlist_id: {
       type: 'VARCHAR(50)',
-      reference: 'playlists',
-      onDelete: 'cascade',
     },
     song_id: {
       type: 'VARCHAR(50)',
-      reference: 'songs',
-      onDelete: 'cascade',
     },
   });
   pgm.createTable('playlist_song_activities', {
@@ -99,8 +90,6 @@ exports.up = (pgm) => {
     },
     playlist_id: {
       type: 'VARCHAR(50)',
-      reference: 'playlists',
-      onDelete: 'cascade',
     },
     song_id: {
       type: 'VARCHAR(50)',

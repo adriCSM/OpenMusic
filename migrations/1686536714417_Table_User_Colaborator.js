@@ -27,13 +27,9 @@ exports.up = (pgm) => {
     },
     playlist_id: {
       type: 'VARCHAR(50)',
-      reference: 'playlists',
-      onDelete: 'cascade',
     },
     user_id: {
       type: 'VARCHAR(50)',
-      reference: 'users',
-      onDelete: 'cascade',
     },
   });
 };
