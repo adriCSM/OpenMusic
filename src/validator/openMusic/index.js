@@ -12,6 +12,7 @@ const {
 } = require('./schema');
 
 const OpenMusicValidator = {
+  // ------------------------------------------------------------------------Schema Album & Song
   validateAlbumPayload: (payload) => {
     const validationResult = AlbumPayloadSchema.validate(payload);
     if (validationResult.error) {
@@ -24,6 +25,8 @@ const OpenMusicValidator = {
       throw new InvariantError(validationResult.error.message);
     }
   },
+
+  // ---------------------------------------------------------------------- Schema User & Authentications
   validateUserPayload: (payload) => {
     const validationResult = UserPayloadSchema.validate(payload);
     if (validationResult.error) {
@@ -48,7 +51,8 @@ const OpenMusicValidator = {
       throw new InvariantError(validationResult.error.message);
     }
   },
-  // ---------------------------------------------Playlist
+
+  // ----------------------------------------------------------------------------Playlist
   validatePostPlaylistPayload: (payload) => {
     const validationResult = PostPlaylistPaylodaSchema.validate(payload);
     if (validationResult.error) {
@@ -61,6 +65,8 @@ const OpenMusicValidator = {
       throw new InvariantError(validationResult.error.message);
     }
   },
+
+  // ----------------------------------------------------------------------------- Schema Collaboration
   validateCollaborationPayload: (payload) => {
     const validationResult = CollaborationPayloadSchema.validate(payload);
     if (validationResult.error) {

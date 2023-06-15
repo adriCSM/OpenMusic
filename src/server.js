@@ -1,25 +1,29 @@
 const Hapi = require('@hapi/hapi');
 require('dotenv').config();
 const Jwt = require('@hapi/jwt');
+
 // Albums & Songs
 const albums = require('./api/albums');
-const AlbumsService = require('./service/postgres/albumsService');
+const AlbumsService = require('./services/postgres/albumsService');
 const songs = require('./api/songs');
-const SongsService = require('./service/postgres/songsService');
+const SongsService = require('./services/postgres/songsService');
 
 // Users & Authentications
 const users = require('./api/users');
-const UsersService = require('./service/postgres/usersService');
+const UsersService = require('./services/postgres/usersService');
 const authentications = require('./api/authentications');
-const AuthenticationsService = require('./service/postgres/authenticationsService');
+const AuthenticationsService = require('./services/postgres/authenticationsService');
 const TokenManager = require('./tokenize/tokenManager');
 
 // playlist
 const playlists = require('./api/playlists');
-const PlaylistsService = require('./service/postgres/playlistsService');
+const PlaylistsService = require('./services/postgres/playlistsService');
+
 // Open Music Validator
 const OpenMusicValidator = require('./validator/openMusic');
-const errorHandling = require('./error handling/errorHandling');
+
+// error handling
+const errorHandling = require('./error/errorHandling');
 
 const init = async () => {
   const authenticationsService = new AuthenticationsService();
@@ -74,6 +78,7 @@ const init = async () => {
       plugin: albums,
       options: {
         service: albumsService,
+        songsService,
         validator: OpenMusicValidator,
       },
     },

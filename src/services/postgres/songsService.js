@@ -11,12 +11,11 @@ class SongsService {
 
   // POST SONG By Album Id Using Request Payload
   async postSong({ title, year, genre, performer, duration, albumId }) {
-    const id = nanoid(16);
+    const id = `song-${nanoid(16)}`;
     const createdAt = new Date().toISOString();
-    const updatedAt = createdAt;
     const query = {
-      text: 'INSERT INTO songs VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING id',
-      values: [id, title, year, genre, performer, duration, albumId, createdAt, updatedAt],
+      text: 'INSERT INTO songs VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$8) RETURNING id',
+      values: [id, title, year, genre, performer, duration, albumId, createdAt],
     };
 
     const result = await this.pool.query(query);
@@ -70,6 +69,16 @@ class SongsService {
       throw new NotFoundError('Lagu tidak ditemukan');
     }
     return result.rows.map(mapDBToModel)[0];
+  }
+  // GET SONG BY ALBUM ID
+  async getSongByAlbumId(albumId) {
+    const query = {
+      text: 'SELECT id,title,performer FROM songs WHERE album_id=$1',
+      values: [albumId],
+    };
+    const result = await this.pool.query(query);
+
+    return result.rows;
   }
 
   // PUT SONG

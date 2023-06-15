@@ -10,7 +10,7 @@ class AlbumService {
 
   // POST ALBUM
   async postAlbum({ name, year }) {
-    const id = nanoid(16);
+    const id = ` album-${nanoid(16)}`;
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
     const query = {
@@ -26,25 +26,17 @@ class AlbumService {
 
   // GET ALBUM BY ID
   async getAlbumById(id) {
-    const queryAlbum = {
+    const query = {
       text: 'SELECT id,name,year FROM albums WHERE id=$1',
       values: [id],
     };
-    const querySongs = {
-      text: 'SELECT id,title,performer FROM songs WHERE album_id=$1',
-      values: [id],
-    };
 
-    let songs = await this.pool.query(querySongs);
-    const album = await this.pool.query(queryAlbum);
-    if (!album.rows.length) {
+    const result = await this.pool.query(query);
+    if (!result.rows.length) {
       throw new NotFoundError('Album tidak ditemukan');
     }
-    if (!songs.rows.length) {
-      songs.rows = [];
-    }
-    album.rows[0].songs = songs.rows;
-    return album.rows[0];
+
+    return result.rows[0];
   }
 
   // PUT ALBUM BY ID
