@@ -45,7 +45,7 @@ class AlbumLikesService {
     if (!result.rows.length) {
       throw new InvariantError('Gagal menambahkan like');
     }
-    await this.cacheService.delete('likes');
+    await this.cacheService.delete(albumId);
   }
 
   async deleteLike(userId, albumId) {
@@ -58,12 +58,12 @@ class AlbumLikesService {
     if (!result.rows.length) {
       throw new InvariantError('Gagal menghapus like');
     }
-    await this.cacheService.delete('likes');
+    await this.cacheService.delete(albumId);
   }
 
   async getLike(albumId) {
     try {
-      const result = await this.cacheService.get('likes');
+      const result = await this.cacheService.get(albumId);
 
       return { likes: JSON.parse(result), fromCache: true };
     } catch (error) {
@@ -72,7 +72,7 @@ class AlbumLikesService {
         values: [albumId],
       };
       const result = await this.pool.query(query);
-      await this.cacheService.set('likes', result.rowCount);
+      await this.cacheService.set(albumId, result.rowCount);
 
       return { likes: result.rowCount, fromCache: false };
     }
