@@ -12,6 +12,10 @@ exports.up = (pgm) => {
       type: 'INTEGER',
       notNull: true,
     },
+    cover: {
+      type: 'TEXT',
+      default: null,
+    },
     created_at: {
       type: 'TIMESTAMP',
       notNull: true,
@@ -108,6 +112,20 @@ exports.up = (pgm) => {
       notNull: true,
     },
   });
+  pgm.createTable('user_album_likes', {
+    id: {
+      type: 'VARCHAR(50)',
+      primaryKey: true,
+    },
+    user_id: {
+      type: 'VARCHAR(50)',
+      notNull: true,
+    },
+    album_id: {
+      type: 'VARCHAR(50)',
+      notNull: true,
+    },
+  });
 };
 
 exports.down = (pgm) => {
@@ -116,4 +134,5 @@ exports.down = (pgm) => {
   pgm.dropTable('playlists');
   pgm.dropTable('playlist_songs');
   pgm.dropTable('playlist_song_activities');
+  pgm.dropTable('user_album_likes');
 };

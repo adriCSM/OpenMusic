@@ -1,10 +1,11 @@
 class UserHandlers {
-  constructor(service, validator) {
+  constructor(service, userValidator, collaborationValidator) {
     this.service = service;
-    this.validator = validator;
+    this.userValidator = userValidator;
+    this.collaborationValidator = collaborationValidator;
   }
   async postUserHandler(request, h) {
-    this.validator.validateUserPayload(request.payload);
+    this.userValidator.validateUserPayload(request.payload);
     const { username, password, fullname } = request.payload;
     const userId = await this.service.postUser(username, password, fullname);
 
@@ -17,7 +18,7 @@ class UserHandlers {
   }
 
   async postCollaboratorHandler(request, h) {
-    this.validator.validateCollaborationPayload(request.payload);
+    this.collaborationValidator.validateCollaborationPayload(request.payload);
     const { playlistId, userId } = request.payload;
     const { id: crederntialId } = request.auth.credentials;
     await this.service.verifyPlaylistOwner(playlistId, crederntialId);
@@ -34,6 +35,7 @@ class UserHandlers {
   }
 
   async deleteCollaboratorHandler(request, h) {
+    this.collaborationValidator.validateCollaborationPayload(request.payload);
     const { playlistId, userId } = request.payload;
     const { id: crederntialId } = request.auth.credentials;
     await this.service.verifyPlaylistOwner(playlistId, crederntialId);

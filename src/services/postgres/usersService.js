@@ -9,7 +9,7 @@ class UsersService {
   constructor() {
     this.pool = new Pool();
   }
-  // ===========================================================USER
+  // =========================================================== USER
   async verifyNewUsername(username) {
     const query = {
       text: 'SELECT * FROM users WHERE username=$1',
@@ -24,7 +24,7 @@ class UsersService {
 
   async postUser(username, password, fullname) {
     await this.verifyNewUsername(username);
-    const id = nanoid(16);
+    const id = `user-${nanoid(16)}`;
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
     const query = {

@@ -3,7 +3,7 @@ class PlaylistHandlers {
     this.service = service;
     this.validator = validator;
   }
-  // ------------------------------------Playlist
+  // ---------------------------------------------------------  Playlist
   async postPlaylistHandler(request, h) {
     this.validator.validatePostPlaylistPayload(request.payload);
     const { name } = request.payload;
@@ -18,6 +18,7 @@ class PlaylistHandlers {
     response.code(201);
     return response;
   }
+
   async getPlaylistHandler(request, h) {
     const { id: credentialId } = request.auth.credentials;
     const playlists = await this.service.getPlaylist(credentialId);
@@ -30,6 +31,7 @@ class PlaylistHandlers {
     response.code(200);
     return response;
   }
+
   async deletePlaylistHandler(request, h) {
     const { id } = request.params;
     const { id: credentialId } = request.auth.credentials;
@@ -42,6 +44,7 @@ class PlaylistHandlers {
     response.code(200);
     return response;
   }
+
   // ====================================================Playlist_Songs
   async postSongInPlaylistHandler(request, h) {
     this.validator.validatePostSongInPlaylistPayload(request.payload);
@@ -86,6 +89,7 @@ class PlaylistHandlers {
     response.code(200);
     return response;
   }
+
   // ====================================================Playlist Activities
   async getPlaylistActivitiesHandler(request, h) {
     const { id } = request.params;

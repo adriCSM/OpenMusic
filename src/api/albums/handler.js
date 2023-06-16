@@ -4,6 +4,7 @@ class AlbumHandlers {
     this.validator = validator;
     this.songsService = songsService;
   }
+
   // -----------------------------------------------------------------POST ALBUM
   async postAlbumHandler(request, h) {
     this.validator.validateAlbumPayload(request.payload);
@@ -40,7 +41,6 @@ class AlbumHandlers {
     this.validator.validateAlbumPayload(request.payload);
     const { id } = request.params;
     const { name, year } = request.payload;
-
     await this.service.putAlbumById(id, { name, year });
     const response = h.response({
       status: 'success',

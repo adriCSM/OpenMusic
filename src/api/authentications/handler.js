@@ -52,7 +52,6 @@ class AuthenticationHandlers {
       status: 'success',
       message: 'Berhasil menghapus refresh token',
     });
-
     response.code(200);
     return response;
   }

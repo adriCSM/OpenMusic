@@ -1,5 +1,6 @@
 const routes = require('./routes');
 const AlbumHandlers = require('./handler');
+
 module.exports = {
   name: 'albums',
   version: '1.0.0',
